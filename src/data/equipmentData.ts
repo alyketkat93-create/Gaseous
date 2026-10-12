@@ -1,0 +1,183 @@
+export interface EquipmentItem {
+  id: string;
+  manufacturer: string;
+  productName: string;
+  agentType: string;
+  cylinderModel: string;
+  waterCapacityL: number;
+  minFillDensityKgL?: number;
+  maxFillDensityKgL?: number;
+  maxFillKg?: number;
+  storagePressureBar: number;
+  temperatureRangeC: string;
+  valveSizeMm: number;
+  valveType: string;
+  approvedOrientation: 'Vertical Only' | 'Vertical or Horizontal';
+  approvals: string[];
+  datasheetRef: string;
+  verificationStatus: 'Verified (Manufacturer Data)' | 'Pending Verification';
+}
+
+export const EQUIPMENT_DATABASE: EquipmentItem[] = [
+  {
+    id: 'kidde-fm200-80l',
+    manufacturer: 'Kidde Fire Systems',
+    productName: 'ECS Series Clean Agent System',
+    agentType: 'HFC-227ea (FM-200)',
+    cylinderModel: '45-100080-001',
+    waterCapacityL: 80,
+    minFillDensityKgL: 0.50,
+    maxFillDensityKgL: 1.15,
+    maxFillKg: 92.0,
+    storagePressureBar: 25,
+    temperatureRangeC: '0°C to 54°C',
+    valveSizeMm: 50,
+    valveType: '2-inch High Flow Differential Pressure Valve',
+    approvedOrientation: 'Vertical Only',
+    approvals: ['UL Listed', 'FM Approved', 'USCG', 'SASO'],
+    datasheetRef: 'DS-KFS-ECS-080 Rev 4',
+    verificationStatus: 'Verified (Manufacturer Data)',
+  },
+  {
+    id: 'kidde-fm200-140l',
+    manufacturer: 'Kidde Fire Systems',
+    productName: 'ECS Series Clean Agent System',
+    agentType: 'HFC-227ea (FM-200)',
+    cylinderModel: '45-100140-001',
+    waterCapacityL: 140,
+    minFillDensityKgL: 0.50,
+    maxFillDensityKgL: 1.15,
+    maxFillKg: 161.0,
+    storagePressureBar: 25,
+    temperatureRangeC: '0°C to 54°C',
+    valveSizeMm: 65,
+    valveType: '2.5-inch High Flow Differential Pressure Valve',
+    approvedOrientation: 'Vertical Only',
+    approvals: ['UL Listed', 'FM Approved', 'LPCB', 'SASO'],
+    datasheetRef: 'DS-KFS-ECS-140 Rev 5',
+    verificationStatus: 'Verified (Manufacturer Data)',
+  },
+  {
+    id: 'fike-fk5112-100l',
+    manufacturer: 'Fike Corporation',
+    productName: 'ECARO-25 / FK-5-1-12 Impulse System',
+    agentType: 'FK-5-1-12 Clean Agent',
+    cylinderModel: '70-264-100',
+    waterCapacityL: 100,
+    minFillDensityKgL: 0.40,
+    maxFillDensityKgL: 1.20,
+    maxFillKg: 120.0,
+    storagePressureBar: 42,
+    temperatureRangeC: '-18°C to 55°C',
+    valveSizeMm: 50,
+    valveType: 'Impulse Valve Technology (Fast Opening)',
+    approvedOrientation: 'Vertical Only',
+    approvals: ['UL Listed', 'FM Approved', 'CE', 'SASO'],
+    datasheetRef: 'DS-FIKE-IV-FK-100 Rev C',
+    verificationStatus: 'Verified (Manufacturer Data)',
+  },
+  {
+    id: 'fike-fk5112-140l',
+    manufacturer: 'Fike Corporation',
+    productName: 'Impulse Clean Agent System',
+    agentType: 'FK-5-1-12 Clean Agent',
+    cylinderModel: '70-264-140',
+    waterCapacityL: 140,
+    minFillDensityKgL: 0.40,
+    maxFillDensityKgL: 1.20,
+    maxFillKg: 168.0,
+    storagePressureBar: 42,
+    temperatureRangeC: '-18°C to 55°C',
+    valveSizeMm: 65,
+    valveType: 'Impulse Valve Technology',
+    approvedOrientation: 'Vertical Only',
+    approvals: ['UL Listed', 'FM Approved', 'CE', 'SASO'],
+    datasheetRef: 'DS-FIKE-IV-FK-140 Rev D',
+    verificationStatus: 'Verified (Manufacturer Data)',
+  },
+  {
+    id: 'ansul-inergen-80l',
+    manufacturer: 'Ansul / Johnson Controls',
+    productName: 'INERGEN 300-Bar iFLOW System',
+    agentType: 'IG-541 (Inergen)',
+    cylinderModel: 'IN-80L-300BAR',
+    waterCapacityL: 80,
+    maxFillKg: 22.8, // m3 free gas
+    storagePressureBar: 300,
+    temperatureRangeC: '-20°C to 54°C',
+    valveSizeMm: 25,
+    valveType: 'iFLOW Regulated Matrix Valve (Constant 60 bar discharge)',
+    approvedOrientation: 'Vertical Only',
+    approvals: ['UL Listed', 'FM Approved', 'LPCB', 'VdS'],
+    datasheetRef: 'F-2017088 Ansul INERGEN iFLOW',
+    verificationStatus: 'Verified (Manufacturer Data)',
+  },
+  {
+    id: 'ansul-inergen-140l',
+    manufacturer: 'Ansul / Johnson Controls',
+    productName: 'INERGEN 300-Bar High Capacity System',
+    agentType: 'IG-541 (Inergen)',
+    cylinderModel: 'IN-140L-300BAR',
+    waterCapacityL: 140,
+    maxFillKg: 39.9, // m3 free gas
+    storagePressureBar: 300,
+    temperatureRangeC: '-20°C to 54°C',
+    valveSizeMm: 25,
+    valveType: 'iFLOW Regulated Discharge Valve',
+    approvedOrientation: 'Vertical Only',
+    approvals: ['UL Listed', 'FM Approved', 'VdS', 'SASO'],
+    datasheetRef: 'F-2018042 Ansul High Capacity',
+    verificationStatus: 'Verified (Manufacturer Data)',
+  },
+  {
+    id: 'kidde-co2-68l',
+    manufacturer: 'Kidde Fire Systems',
+    productName: 'High Pressure CO2 System',
+    agentType: 'Carbon Dioxide (CO2)',
+    cylinderModel: '81-100068-001',
+    waterCapacityL: 68,
+    maxFillKg: 45.0,
+    storagePressureBar: 58,
+    temperatureRangeC: '-18°C to 49°C',
+    valveSizeMm: 32,
+    valveType: 'High Flow Differential Piston Valve',
+    approvedOrientation: 'Vertical Only',
+    approvals: ['UL Listed', 'FM Approved', 'USCG', 'SASO'],
+    datasheetRef: 'DS-KFS-CO2-HP Rev 6',
+    verificationStatus: 'Verified (Manufacturer Data)',
+  },
+  {
+    id: 'firepro-fp3000',
+    manufacturer: 'FirePro Systems',
+    productName: 'Condensed Aerosol Generator',
+    agentType: 'Condensed Aerosol',
+    cylinderModel: 'FP-3000',
+    waterCapacityL: 0,
+    maxFillKg: 3.0, // 3000g compound
+    storagePressureBar: 0, // Unpressurized solid compound
+    temperatureRangeC: '-54°C to 54°C',
+    valveSizeMm: 0,
+    valveType: 'Electrical Igniter / Thermal Cord Activation',
+    approvedOrientation: 'Vertical or Horizontal',
+    approvals: ['UL Listed (UL 2775)', 'BSI Kitemark', 'KIWA', 'Civil Defense Approved'],
+    datasheetRef: 'FP-3000-TD-EN Rev 8',
+    verificationStatus: 'Verified (Manufacturer Data)',
+  },
+  {
+    id: 'chemguard-bladder-3000l',
+    manufacturer: 'Chemguard / Johnson Controls',
+    productName: 'Horizontal Carbon Steel Bladder Tank',
+    agentType: 'Foam Systems (AFFF / SFFF)',
+    cylinderModel: 'CBT-H-3000L',
+    waterCapacityL: 3000,
+    maxFillKg: 3000.0,
+    storagePressureBar: 12,
+    temperatureRangeC: '2°C to 49°C',
+    valveSizeMm: 100,
+    valveType: 'Hydraulic Ratio Controller Proportioner Assembly',
+    approvedOrientation: 'Vertical or Horizontal',
+    approvals: ['UL Listed', 'FM Approved', 'ASME Section VIII'],
+    datasheetRef: 'CG-BT-2022-01',
+    verificationStatus: 'Verified (Manufacturer Data)',
+  },
+];
