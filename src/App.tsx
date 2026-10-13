@@ -55,20 +55,33 @@ const TAB_TO_ROUTE: Record<NavTab, string> = {
 };
 
 // Map URL path or hash to tab ID
-function getTabFromPath(path: string): NavTab {
-  const cleanPath = path.toLowerCase().replace(/\/$/, '') || '/dashboard';
+function getTabFromUrl(): NavTab {
+  // 1. Check window.location.hash (e.g. #/calculators/fm200 or #fm200)
+  const hash = window.location.hash.toLowerCase().replace(/^#\/?/, '');
+  if (hash) {
+    for (const [tab, route] of Object.entries(TAB_TO_ROUTE)) {
+      const cleanRoute = route.replace(/^\//, '').toLowerCase();
+      if (hash === cleanRoute || hash.endsWith(cleanRoute) || hash === tab) {
+        return tab as NavTab;
+      }
+    }
+  }
+
+  // 2. Check window.location.pathname (e.g. /calculators/fm200 or /Gaseous/calculators/fm200)
+  const cleanPath = window.location.pathname.toLowerCase().replace(/\/$/, '') || '/dashboard';
   for (const [tab, route] of Object.entries(TAB_TO_ROUTE)) {
     if (cleanPath === route || cleanPath.endsWith(route)) {
       return tab as NavTab;
     }
   }
+
   return 'dashboard';
 }
 
 export function App() {
   const [calculations, setCalculations] = useState<CalculationRecord[]>(() => loadSavedCalculations());
   const [companySettings, setCompanySettings] = useState<CompanySettings>(() => loadCompanySettings());
-  const [currentTab, setCurrentTab] = useState<NavTab>(() => getTabFromPath(window.location.pathname));
+  const [currentTab, setCurrentTab] = useState<NavTab>(() => getTabFromUrl());
   const [lang, setLang] = useState<Language>(() => companySettings.defaultLanguage || 'en');
   const [unitSystem, setUnitSystem] = useState<UnitSystem>(() => companySettings.defaultUnitSystem || 'metric');
   const [theme, setTheme] = useState<'light' | 'dark'>(() => companySettings.theme || 'light');
@@ -79,22 +92,24 @@ export function App() {
     calculations[0]
   );
 
-  // URL sync on load & popstate
+  // URL sync on load, hashchange & popstate
   useEffect(() => {
-    const handlePopState = () => {
-      setCurrentTab(getTabFromPath(window.location.pathname));
+    const handleUrlChange = () => {
+      setCurrentTab(getTabFromUrl());
     };
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    window.addEventListener('popstate', handleUrlChange);
+    window.addEventListener('hashchange', handleUrlChange);
+    return () => {
+      window.removeEventListener('popstate', handleUrlChange);
+      window.removeEventListener('hashchange', handleUrlChange);
+    };
   }, []);
 
   // Update browser URL on tab change
   const handleSelectTab = (tab: NavTab) => {
     setCurrentTab(tab);
     const targetRoute = TAB_TO_ROUTE[tab] || '/dashboard';
-    if (window.location.pathname !== targetRoute) {
-      window.history.pushState(null, '', targetRoute);
-    }
+    window.location.hash = targetRoute;
   };
 
   // Sync RTL / LTR attribute on <html> element

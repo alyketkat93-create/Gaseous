@@ -475,12 +475,12 @@ export function loadStoredProjects(): Project[] {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) {
         let changed = false;
-        parsed.forEach((p: Project) => {
+        parsed.forEach((p: any) => {
           if (p.designer === 'Eng. Tarek Mansour, PE') {
             p.designer = 'Aly Ketkat';
             changed = true;
           }
-          p.activityLog?.forEach((act) => {
+          p.activityLog?.forEach((act: any) => {
             if (act.authorName === 'Eng. Tarek Mansour') {
               act.authorName = 'Aly Ketkat';
               changed = true;
